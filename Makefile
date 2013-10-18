@@ -10,7 +10,7 @@ BIN := client server
 compile: $(BIN)
 
 $(BIN): $(OBJ)
-	$(CC) $(CFLAGS) -o bin/$@ $(shell find src/$@ -name *.o)
+	$(CC) $(CFLAGS) -o bin/$@.bin $(shell find src/$@ -name *.o)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -18,5 +18,5 @@ $(BIN): $(OBJ)
 .PHONEY: clean
 clean:
 	@find . -name *.o | xargs -L 1 rm -f
-	@rm -rf bin/*
+	@rm -rf bin/*.bin
 
