@@ -6,14 +6,11 @@
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
-
-#include <lib.h>
  
 #define PORTNUM 2343
  
-int main(int argc, char *argv[])
-{
-    char msg[] = "Hello World !\n";
+int main(int argc, char *argv[]) {
+    char* msg = "Server says hello\0";
  
     struct sockaddr_in dest; /* socket info about the machine connecting to us */
     struct sockaddr_in serv; /* socket info about our server */
