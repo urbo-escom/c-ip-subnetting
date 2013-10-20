@@ -1,18 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+#ifdef _linux
+
 #include <string.h>
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
- 
+
+#elif _WIN32
+
+#include <winsock.h>
+
+#define socklen_t int
+
+#define close(s) \
+	closesocket(s);\
+	WSACleanup();
+
+#endif
+
 #define PORTNUM 2343
  
-int main(int argc, char *argv[])
-{
-    char msg[] = "Hello World !\n";
- 
+int main(int argc, char *argv[]) {
+
+    #ifdef _WIN32
+    WSADATA wsaData;
+
+    if(WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
+       fprintf(stderr,"WSAStartup() failed");
+       exit(1);
+    }
+    #endif
+
+    char msg[] = "Hello client !\n";
+
     struct sockaddr_in dest; /* socket info about the machine connecting to us */
     struct sockaddr_in serv; /* socket info about our server */
     int mysocket;            /* socket used to listen for incoming connections */

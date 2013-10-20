@@ -1,17 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+#ifdef _linux
+
 #include <string.h>
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
+
+#elif _WIN32
+
+#include <winsock.h>
+
+#define close(s) \
+	closesocket(s);\
+	WSACleanup();
+
+#endif
  
+
 #define MAXRCVLEN 500
 #define PORTNUM 2343
  
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
+
+    #ifdef _WIN32
+    WSADATA wsaData;
+
+    if(WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
+       fprintf(stderr,"WSAStartup() failed");
+       exit(1);
+    }
+    #endif
+
    char buffer[MAXRCVLEN + 1]; /* +1 so we can add null terminator */
    int len, mysocket;
    struct sockaddr_in dest; 
