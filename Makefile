@@ -1,22 +1,51 @@
 CC=gcc
 CFLAGS=-Wall
+OS_ESPECIFIC_CFLAGS=
+LFLAGS=
+OS_ESPECIFIC_LFALGS=
 
-CFLAGS += -Iinclude/
+debug=@echo debug-on-command:
 
-SRC := $(shell find . -name *.c)
-OBJ := $(SRC:%.c=%.o)
+# Windows especific commands
+ifdef SystemRoot
+	EXT=.exe
+	RM=del /q $(1) 2>NUL
+	fixpath=$(subst /,\,$(1))
+else
+# Linux especific commands
+ifeq ($(shell uname), Linux)
+	EXT=
+	RM=rm -rf $(1)
+	fixpath=$(1)
+endif
+endif
 
-BIN := client server
-compile: $(BIN)
+COMMON_FOLDERS:=network gtk
+SRC_FOLDERS:=client server $(COMMON_FOLDERS)
+
+SRC:=$(foreach folder,$(SRC_FOLDERS),$(wildcard src/$(folder)/*.c))
+
+OBJ:=$(SRC:%.c=%.o)
+COMMON_OBJ:=$(foreach folder,$(COMMON_FOLDERS),$(wildcard src/$(folder)/*.o))
+
+BIN:=$(foreach file,client server,bin/$(file)$(EXT))
+
+all: $(BIN)
 
 $(BIN): $(OBJ)
-	$(CC) $(CFLAGS) -o bin/$@.bin $(shell find src/$@ -name *.o)
+	$(debug) $(CC) -o $@ \
+	$(filter src/$(subst bin/,,$@)/%.o,$(OBJ)) \
+	$(COMMON_OBJ) \
+	$(LFLAGS) $(OS_ESPECIFIC_LFLAGS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(debug) $(CC) \
+	$(CFLAGS) $(OS_ESPECIFIC_CFLAGS) \
+	-c $< -o $@
 
 .PHONEY: clean
 clean:
-	@find . -name *.o | xargs -L 1 rm -f
-	@rm -rf bin/*.bin
+	$(debug) $(call RM,$(call fixpath,$(OBJ)))
+	$(debug) $(call RM,$(call fixpath,$(filter-out %.md,$(wildcard bin/*))))
+
 

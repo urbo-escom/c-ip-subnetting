@@ -6,8 +6,6 @@
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
-
-#include <lib.h>
  
 #define PORTNUM 2343
  
