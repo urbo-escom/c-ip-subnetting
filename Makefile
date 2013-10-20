@@ -33,9 +33,11 @@ BIN:=$(foreach file,client server,bin/$(file)$(EXT))
 all: $(BIN)
 
 $(BIN): $(OBJ)
-	$(debug) $(CC) -o $@ \
-	$(filter src/$(subst bin/,,$@)/%.o,$(OBJ)) \
-	$(COMMON_OBJ) \
+	$(debug) $(CC) -o $(call fixpath,$@) \
+	$(call fixpath,\
+		$(filter $(subst $(EXT),,\
+			$(subst bin/,src/,$@))/%.o,$(OBJ))) \
+	$(call fixpath,$(COMMON_OBJ)) \
 	$(LFLAGS) $(OS_ESPECIFIC_LFLAGS)
 
 %.o: %.c
