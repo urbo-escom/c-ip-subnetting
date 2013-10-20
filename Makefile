@@ -2,7 +2,7 @@ CC=gcc
 CFLAGS=-Wall
 OS_ESPECIFIC_CFLAGS=
 LFLAGS=
-OS_ESPECIFIC_LFALGS=
+OS_ESPECIFIC_LFLAGS=
 
 debug=@echo debug-on-command:
 
