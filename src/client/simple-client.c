@@ -47,7 +47,10 @@ int main(int argc, char *argv[]) {
    dest.sin_port = htons(PORTNUM);                /* set destination port number */
  
    connect(mysocket, (struct sockaddr *)&dest, sizeof(struct sockaddr));
- 
+
+   char* request = "Hello server !";
+   send(mysocket, request, strlen(request), 0);
+
    len = recv(mysocket, buffer, MAXRCVLEN, 0);
  
    /* We have to null terminate the received data ourselves */

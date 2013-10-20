@@ -58,6 +58,11 @@ int main(int argc, char *argv[]) {
  
     while(consocket)
     {
+        char income[1025];
+        int len = recv(consocket, income, 1025, 0);
+        income[len] = '\0';
+        printf("Received %s(%d bytes).\n", income, len);
+
         printf("Incoming connection from %s - sending welcome\n", inet_ntoa(dest.sin_addr));
         send(consocket, msg, strlen(msg), 0); 
         consocket = accept(mysocket, (struct sockaddr *)&dest, &socksize);
