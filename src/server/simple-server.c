@@ -58,6 +58,21 @@ int main(int argc, char *argv[]) {
  
     while(consocket)
     {
+        int seconds = 10;
+        #ifdef __linux
+           #define my_timeout_t char *
+        struct timeval timeout;
+           timeout.tv_sec = seconds;
+           timeout.tv_usec = 0;
+        #elif _WIN32
+           #define my_timeout_t const char *
+        DWORD timeout = seconds*1000;
+        #endif
+
+        setsockopt(consocket, SOL_SOCKET, SO_RCVTIMEO,
+                   (my_timeout_t)&timeout,
+                   sizeof(timeout));
+
         char income[1025];
         int len = recv(consocket, income, 1025, 0);
         income[len] = '\0';

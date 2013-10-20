@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #ifdef __linux
 
@@ -13,6 +14,9 @@
 #elif _WIN32
 
 #include <winsock.h>
+#include <windows.h>
+
+#define sleep(i) Sleep((i)*1000)
 
 #define close(s) \
 	closesocket(s);\
@@ -47,6 +51,13 @@ int main(int argc, char *argv[]) {
    dest.sin_port = htons(PORTNUM);                /* set destination port number */
  
    connect(mysocket, (struct sockaddr *)&dest, sizeof(struct sockaddr));
+
+   int i = 0;
+   while(i < 22) {
+      printf("Let the server wait :D %d s\n", i);
+      i++;
+      sleep(1);
+   }
 
    char* request = "Hello server !";
    send(mysocket, request, strlen(request), 0);
