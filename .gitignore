@@ -1,3 +1,6 @@
+# Swap/Backup files
+*.swp
+
 # Object files
 *.o
 *.ko
