@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#ifdef _linux
+#ifdef __linux
 
 #include <string.h>
 #include <unistd.h>
