@@ -11,6 +11,7 @@ ifdef SystemRoot
 	EXT=.exe
 	RM=del /q $(1) 2>NUL
 	fixpath=$(subst /,\,$(1))
+	OS_ESPECIFIC_LFLAGS+=-lws2_32
 else
 # Linux especific commands
 ifeq ($(shell uname), Linux)
