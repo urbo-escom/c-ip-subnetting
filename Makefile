@@ -46,7 +46,7 @@ $(BIN): $(OBJ)
 	$(CFLAGS) $(OS_ESPECIFIC_CFLAGS) \
 	-c $< -o $@
 
-.PHONEY: clean
+.PHONY: clean
 clean:
 	$(debug) $(call RM,$(call fixpath,$(OBJ)))
 	$(debug) $(call RM,$(call fixpath,$(filter-out %.md,$(wildcard bin/*))))
