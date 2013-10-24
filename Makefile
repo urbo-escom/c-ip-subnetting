@@ -27,7 +27,7 @@ SRC_FOLDERS:=client server $(COMMON_FOLDERS)
 SRC:=$(foreach folder,$(SRC_FOLDERS),$(wildcard src/$(folder)/*.c))
 
 OBJ:=$(SRC:%.c=%.o)
-COMMON_OBJ:=$(foreach folder,$(COMMON_FOLDERS),$(wildcard src/$(folder)/*.o))
+COMMON_OBJ:=$(foreach folder,$(COMMON_FOLDERS),$(filter src/$(folder)/%.o,$(OBJ))) 
 
 BIN:=$(foreach file,client server,bin/$(file)$(EXT))
 
