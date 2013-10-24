@@ -4,8 +4,6 @@ OS_ESPECIFIC_CFLAGS=
 LFLAGS=
 OS_ESPECIFIC_LFLAGS=
 
-debug=@echo debug-on-command:
-
 # Windows especific commands
 ifdef SystemRoot
 	EXT=.exe
@@ -34,7 +32,7 @@ BIN:=$(foreach file,client server,bin/$(file)$(EXT))
 all: $(BIN)
 
 $(BIN): $(OBJ)
-	$(debug) $(CC) -o $(call fixpath,$@) \
+	$(CC) -o $(call fixpath,$@) \
 	$(call fixpath,\
 		$(filter $(subst $(EXT),,\
 			$(subst bin/,src/,$@))/%.o,$(OBJ))) \
@@ -42,13 +40,13 @@ $(BIN): $(OBJ)
 	$(LFLAGS) $(OS_ESPECIFIC_LFLAGS)
 
 %.o: %.c
-	$(debug) $(CC) \
+	$(CC) \
 	$(CFLAGS) $(OS_ESPECIFIC_CFLAGS) \
 	-c $< -o $@
 
 .PHONY: clean
 clean:
-	$(debug) $(call RM,$(call fixpath,$(OBJ)))
-	$(debug) $(call RM,$(call fixpath,$(filter-out %.md,$(wildcard bin/*))))
+	$(call RM,$(call fixpath,$(OBJ)))
+	$(call RM,$(call fixpath,$(filter-out %.md,$(wildcard bin/*))))
 
 
