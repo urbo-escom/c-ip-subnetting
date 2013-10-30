@@ -1,15 +1,16 @@
 CC=gcc
-CFLAGS=-Wall
-OS_ESPECIFIC_CFLAGS=
-LFLAGS=
-OS_ESPECIFIC_LFLAGS=
+override CFLAGS+= -Wall $(shell pkg-config --cflags gtk+-3.0)
+override OS_ESPECIFIC_CFLAGS+=
+override LFLAGS+= $(shell pkg-config --libs gtk+-3.0)
+override OS_ESPECIFIC_LFLAGS+=
 
 # Windows especific commands
 ifdef SystemRoot
 	EXT=.exe
 	RM=del /q $(1) 2>NUL
 	fixpath=$(subst /,\,$(1))
-	OS_ESPECIFIC_LFLAGS+=-lws2_32
+override OS_ESPECIFIC_CFLAGS+=
+override OS_ESPECIFIC_LFLAGS+=-lws2_32
 else
 # Linux especific commands
 ifeq ($(shell uname), Linux)
