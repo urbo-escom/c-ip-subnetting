@@ -20,13 +20,17 @@ ifeq ($(shell uname), Linux)
 endif
 endif
 
-COMMON_FOLDERS:=network gtk
+COMMON_FOLDERS:=network gtk debug subnetting
 SRC_FOLDERS:=client server $(COMMON_FOLDERS)
+
+override CFLAGS+=$(foreach folder,$(COMMON_FOLDERS), -I./src/$(folder))
 
 SRC:=$(foreach folder,$(SRC_FOLDERS),$(wildcard src/$(folder)/*.c))
 
 OBJ:=$(SRC:%.c=%.o)
-COMMON_OBJ:=$(foreach folder,$(COMMON_FOLDERS),$(filter src/$(folder)/%.o,$(OBJ))) 
+COMMON_OBJ:=\
+	$(foreach folder,$(COMMON_FOLDERS),\
+		$(filter src/$(folder)/%.o,$(OBJ)))
 
 BIN:=$(foreach file,client server,bin/$(file)$(EXT))
 
