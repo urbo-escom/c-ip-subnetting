@@ -39,14 +39,14 @@ BIN:=$(foreach file,client server,bin/$(file)$(EXT))
 all: $(BIN) test
 
 bin/client$(EXT): $(HDR) $(OBJ)
-	$(call fixpath,$(CC) -o $@ \
-		src/network/*.o src/subnetting/*.o src/client/*.o \
-		$(ALL_LFLAGS))
+	$(CC) -o $@ \
+		src/network/*.o src/client/*.o \
+		$(ALL_LFLAGS)
 
 bin/server$(EXT): $(HDR) $(OBJ)
-	$(call fixpath,$(CC) -o $@ \
+	$(CC) -o $@ \
 		src/network/*.o src/subnetting/*.o src/server/*.o \
-		$(ALL_LFLAGS))
+		$(ALL_LFLAGS)
 
 TEST_SRC:=$(wildcard test/*.c)
 TEST_BIN:=$(TEST_SRC:%.c=%$(EXT))
