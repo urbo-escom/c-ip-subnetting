@@ -8,7 +8,7 @@ override OS_ESPECIFIC_LFLAGS+=
 ifdef SystemRoot
 	EXT=.exe
 	RM=del /q $(1) 2>NUL
-	fixpath=$(subst /,\,$(1))
+	fixpath=$(strip $(subst /,\,$(1)))
 override OS_ESPECIFIC_CFLAGS+=
 override OS_ESPECIFIC_LFLAGS+=-lws2_32
 else
@@ -16,42 +16,52 @@ else
 ifeq ($(shell uname), Linux)
 	EXT=
 	RM=rm -rf $(1)
-	fixpath=$(1)
+	fixpath=$(strip $(1))
 endif
 endif
 
-COMMON_FOLDERS:=network gtk debug subnetting
-SRC_FOLDERS:=client server $(COMMON_FOLDERS)
+SRC_FOLDERS:=client server network debug subnetting
 
-override CFLAGS+=$(foreach folder,$(COMMON_FOLDERS), -I./src/$(folder))
+# Inlude libraries
+override CFLAGS+=$(foreach folder,$(SRC_FOLDERS), -I./src/$(folder))
 
+HDR:=$(foreach folder,$(SRC_FOLDERS),$(wildcard src/$(folder)/*.h))
 SRC:=$(foreach folder,$(SRC_FOLDERS),$(wildcard src/$(folder)/*.c))
 
 OBJ:=$(SRC:%.c=%.o)
-COMMON_OBJ:=\
-	$(foreach folder,$(COMMON_FOLDERS),\
-		$(filter src/$(folder)/%.o,$(OBJ)))
+
+ALL_CFLAGS:=$(CFLAGS) $(OS_ESPECIFIC_CFLAGS)
+ALL_LFLAGS:=$(LFLAGS) $(OS_ESPECIFIC_LFLAGS)
 
 BIN:=$(foreach file,client server,bin/$(file)$(EXT))
 
-all: $(BIN)
+.PHONY: all test clean
+all: $(BIN) test
 
-$(BIN): $(OBJ)
-	$(CC) -o $(call fixpath,$@) \
-	$(call fixpath,\
-		$(filter $(subst $(EXT),,\
-			$(subst bin/,src/,$@))/%.o,$(OBJ))) \
-	$(call fixpath,$(COMMON_OBJ)) \
-	$(LFLAGS) $(OS_ESPECIFIC_LFLAGS)
+bin/client$(EXT): $(HDR) $(OBJ)
+	$(call fixpath,$(CC) -o $@ \
+		src/network/*.o src/subnetting/*.o src/client/*.o \
+		$(ALL_LFLAGS))
+
+bin/server$(EXT): $(HDR) $(OBJ)
+	$(call fixpath,$(CC) -o $@ \
+		src/network/*.o src/subnetting/*.o src/server/*.o \
+		$(ALL_LFLAGS))
+
+TEST_SRC:=$(wildcard test/*.c)
+TEST_BIN:=$(TEST_SRC:%.c=%$(EXT))
+test: $(TEST_BIN)
+
+test/%$(EXT): test/%.c
+	$(call fixpath,$(CC) $(ALL_CFLAGS) -o $@ \
+		$< $(filter-out %main.o,$(OBJ)) $(ALL_LFLAGS))
 
 %.o: %.c
-	$(CC) \
-	$(CFLAGS) $(OS_ESPECIFIC_CFLAGS) \
-	-c $< -o $@
+	$(call fixpath,$(CC) $(ALL_CFLAGS) -c $< -o $@)
 
-.PHONY: clean
 clean:
 	$(call RM,$(call fixpath,$(OBJ)))
 	$(call RM,$(call fixpath,$(filter-out %.md,$(wildcard bin/*))))
+	$(call RM,$(call fixpath,$(filter-out %.c,$(wildcard test/*))))
 
 
