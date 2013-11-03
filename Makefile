@@ -50,7 +50,7 @@ bin/server$(EXT): $(HDR) $(OBJ)
 
 TEST_SRC:=$(wildcard test/*.c)
 TEST_BIN:=$(TEST_SRC:%.c=%$(EXT))
-test: $(TEST_BIN)
+test: $(OBJ) $(TEST_BIN)
 
 test/%$(EXT): test/%.c
 	$(call fixpath,$(CC) $(ALL_CFLAGS) -o $@ \
