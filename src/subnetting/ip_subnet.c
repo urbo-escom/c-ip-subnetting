@@ -38,3 +38,10 @@ extern IP_T Subnet_mask(
 		(-1L) << (host_bits - subnet_bits);
 }
 
+extern int Subnet_is_used(
+		IP_T ip, int subnet_bits, Subnet subnet_number) {
+	return Subnet_subnet_id(ip, subnet_bits, subnet_number) != ip &&
+	       Subnet_broadcast(ip, subnet_bits, subnet_numbet) !=
+	       IP_broadcast(ip);
+}
+

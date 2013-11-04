@@ -20,5 +20,7 @@ extern IP_T Subnet_host_end(
 extern IP_T Subnet_mask(
 		IP_T ip, int subnet_bits, Subnet subnet_number);
 
+extern int Subnet_is_used(
+		IP_T ip, int subnet_bits, Subnet subnet_number);
 #endif
 
