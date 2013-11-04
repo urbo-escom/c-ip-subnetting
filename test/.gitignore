@@ -1,0 +1,5 @@
+# Only c files and .gitignore itself
+*
+!.gitignore
+!*.c
+
