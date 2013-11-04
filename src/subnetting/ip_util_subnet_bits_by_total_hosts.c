@@ -42,7 +42,7 @@ extern int IP_subnet_bits_by_total_hosts(
 	return -1;
 }
 
-extern subnet_size_t IP_subnets_size(IP_T ip, int subnet_bits) {
+extern subnet_size_t IP_subnets_size(int subnet_bits) {
 	return (1L << subnet_bits) - 2;
 }
 

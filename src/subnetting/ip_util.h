@@ -32,7 +32,7 @@ extern int IP_subnet_bits_by_subnets(
   */
 extern int IP_host_bits_by_total_hosts(host_size_t total_hosts);
 
-extern subnet_size_t IP_subnets_size(IP_T ip, int subnet_bits);
+extern subnet_size_t IP_subnets_size(int subnet_bits);
 
 /** Returns a private IP,
   * IP's are numbered from 0 to the size of private IP's - 1
