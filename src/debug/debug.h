@@ -14,6 +14,7 @@
 #include <errno.h>
 #include <string.h>
 
+#ifndef NLOG_ALL
 /* This smells bad... */
 #include <time.h>
 
@@ -33,6 +34,7 @@ static char* get_time() {
 #endif
 	return buffer;
 }
+#endif
 
 #define clean_errno() (errno == 0 ? "None" : strerror(errno))
 
