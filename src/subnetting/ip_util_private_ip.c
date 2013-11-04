@@ -16,7 +16,7 @@ extern IP_T IP_private_ip(int host_bits, int id) {
 			sprintf(address, "172.%d.0.0", id);
 			break;
 		case 8:
-			id = (id % 256) + 255;
+			id = id % 256;
 			sprintf(address, "192.168.%d.0", id);
 			break;
 		default:
