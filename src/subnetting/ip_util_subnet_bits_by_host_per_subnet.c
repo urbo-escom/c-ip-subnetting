@@ -13,13 +13,13 @@ extern int IP_subnet_bits_by_hosts_per_subnet(
           * (host_bits - subnet_bits) = log2(hosts/subnet + 2)
 	  * subnet_bits = host_bits - log2(hosts/subnet + 2)
 	  */
-	hosts_per_subnet += 2;
+	int aux = hosts_per_subnet + 2;
 	int log2 = 0;
-	while (hosts_per_subnet >>= 1) ++log2;
+	while (aux >>= 1) ++log2;
 
-	if (log2 != 0) {
+	if (log2 != 0 && 0UL < hosts_per_subnet) {
 		int host_bits = IP_host_bits(ip);
-		if (host_bits != -1) {
+		if (host_bits != -1 && (1 < host_bits - log2)) {
 			log_debug("Found %d suitable", host_bits - log2);
 			return host_bits - log2;
 		}
