@@ -41,7 +41,7 @@ extern IP_T Subnet_mask(
 extern int Subnet_is_used(
 		IP_T ip, int subnet_bits, Subnet subnet_number) {
 	return Subnet_subnet_id(ip, subnet_bits, subnet_number) != ip &&
-	       Subnet_broadcast(ip, subnet_bits, subnet_numbet) !=
+	       Subnet_broadcast(ip, subnet_bits, subnet_number) !=
 	       IP_broadcast(ip);
 }
 
