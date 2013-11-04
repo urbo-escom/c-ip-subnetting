@@ -28,13 +28,13 @@ extern char IP_class(IP_T ip) {
 extern IP_T IP_mask(IP_T ip) {
 	int host_bits = IP_host_bits(ip);
 	log_debug("%lx-mask-%lx", ip, (-1L) << (host_bits));
-	return (-1L) << (host_bits);
+	return host_bits == -1? 0UL:(-1L) << (host_bits);
 }
 
 extern IP_T IP_broadcast(IP_T ip) {
 	int host_bits = IP_host_bits(ip);
 	/* NNN...(N + 1)000...0 - 1 = NNN...N111...1 */
-	return ip + (1 << host_bits) - 1;
+	return host_bits == -1? -1:(ip & IP_mask(ip)) + (1 << host_bits) - 1;
 }
 
 extern int IP_is_valid_id(IP_T ip) {
