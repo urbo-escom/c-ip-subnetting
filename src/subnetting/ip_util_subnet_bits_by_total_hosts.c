@@ -21,7 +21,7 @@ extern int IP_subnet_bits_by_total_hosts(
 	log_debug(
 		"Searching suitable subnetting for %lx with %lu total hosts",
 		ip, total_hosts);
-	for(i = 2; i < host_bits - 1; i++) {
+	for(i = 2; (i < host_bits - 1) && (0UL < total_hosts); i++) {
 		hosts_per_subnet = get_hosts_per_subnet(ip, i);
 		total_subnets = get_total_subnets(ip, i);
 		total = hosts_per_subnet*total_subnets;
