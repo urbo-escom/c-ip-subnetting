@@ -29,7 +29,7 @@ extern int Server_init(
 		bytes_recv = Socket_receive(sock, request, 65537);
 
 		if (bytes_recv == -1)
-			status = response(NULL, response_s, 65537);
+			status = response("\0", response_s, 65537);
 		else
 			status = response(request, response_s, 65537);
 
