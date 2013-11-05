@@ -20,7 +20,7 @@ ifeq ($(shell uname), Linux)
 endif
 endif
 
-SRC_FOLDERS:=client server network debug subnetting
+SRC_FOLDERS:=client server network debug subnetting exchange
 
 # Inlude libraries
 override CFLAGS+=$(foreach folder,$(SRC_FOLDERS), -I./src/$(folder))
