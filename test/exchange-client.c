@@ -57,6 +57,6 @@ static int listen(char* request, const char* response, int size) {
 			break;
 	}
 	count++;
-	return !(count < 2);
+	return !(count < 1);
 }
 
