@@ -22,11 +22,10 @@ extern int  Client_init(
 	int bytes_sent;
 	int status;
 	memset(response, 0, sizeof(response));
+	request(request_s, response, 65537);
 	do {
 		log_info("Server: %s:%s",
 		         Socket_get_ip(sock), Socket_get_port(sock));
-
-		status = request(request_s, response, 65537);
 
 		bytes_sent = Socket_send(sock, request_s, strlen(request_s));
 		if (bytes_sent == -1)
@@ -39,6 +38,8 @@ extern int  Client_init(
 			log_debug("Client received '%.*s'", bytes_recv,
 			          response);
 		}
+
+		status = request(request_s, response, 65537);
 	} while(status == 0);
 	return 0;
 }
