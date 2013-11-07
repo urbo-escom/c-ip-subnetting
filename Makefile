@@ -20,7 +20,7 @@ ifeq ($(shell uname), Linux)
 endif
 endif
 
-SRC_FOLDERS:=client server network debug subnetting exchange
+SRC_FOLDERS:=client server network debug subnetting exchange calc
 
 # Inlude libraries
 override CFLAGS+=$(foreach folder,$(SRC_FOLDERS), -I./src/$(folder))
@@ -45,7 +45,8 @@ bin/client$(EXT): $(HDR) $(OBJ)
 
 bin/server$(EXT): $(HDR) $(OBJ)
 	$(CC) -o $@ \
-		src/network/*.o src/subnetting/*.o src/server/*.o \
+		src/network/*.o src/subnetting/*.o \
+		src/server/*.o src/calc/*.o \
 		$(ALL_LFLAGS)
 
 TEST_SRC:=$(wildcard test/*.c)
