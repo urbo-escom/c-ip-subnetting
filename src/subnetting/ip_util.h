@@ -25,12 +25,14 @@ extern int IP_subnet_bits_by_hosts_per_subnet(
 extern int IP_subnet_bits_by_subnets(
 		IP_T ip, subnet_size_t subnets);
 
-/** Returns: Class C host bits if it can handle total hosts subnetting
-  * if not : Class B host bits if it can handle total hosts subnetting
-  * if not : Class A host bits if it can handle total hosts subnetting
+/** Returns: Class C host bits if it can handle subnetting
+  * if not : Class B host bits if it can handle subnetting
+  * if not : Class A host bits if it can handle subnetting
   * if not (and you're unlucky): -1
   */
 extern int IP_host_bits_by_total_hosts(host_size_t total_hosts);
+extern int IP_host_bits_by_hosts_per_subnet(host_size_t hosts_per_subnet);
+extern int IP_host_bits_by_subnets(subnet_size_t subnets);
 
 extern subnet_size_t IP_subnets_size(int subnet_bits);
 
