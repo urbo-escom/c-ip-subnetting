@@ -6,7 +6,7 @@
 #include "exchange.h"
 #include "debug.h"
 
-extern Server_T* Server_create(char* port) {
+extern Server_T* Server_create(const char* port) {
 	Server_T* sock = (Server_T*)Socket_new(NULL, port);
 
 	if (sock == NULL) {

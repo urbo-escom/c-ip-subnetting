@@ -6,7 +6,7 @@
 #define Server_T T
 typedef Socket_T T;
 
-extern T*   Server_create(char* port);
+extern T*   Server_create(const char* port);
 extern void Server_close(T** server);
 /* Response must return a non zero value to stop listening */
 extern int  Server_init(
