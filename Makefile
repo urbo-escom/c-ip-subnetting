@@ -40,13 +40,13 @@ all: $(BIN) test
 
 bin/client$(EXT): $(HDR) $(OBJ)
 	$(CC) -o $@ \
-		src/network/*.o src/client/*.o \
+		src/network/*.o src/client/*.o src/exchange/*.o \
 		$(ALL_LFLAGS)
 
 bin/server$(EXT): $(HDR) $(OBJ)
 	$(CC) -o $@ \
 		src/network/*.o src/subnetting/*.o \
-		src/server/*.o src/calc/*.o \
+		src/server/*.o src/calc/*.o src/exchange/*.o \
 		$(ALL_LFLAGS)
 
 TEST_SRC:=$(wildcard test/*.c)
