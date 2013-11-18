@@ -28,7 +28,7 @@ extern char* SubnetCalcUtil_subnetting(
 	char aux[65];
 	sprintf(s, "%lu ", subnet_number);
 
-	sprintf(aux, "%s", Subnet_is_used(ip, subnet_bits, subnet_number)?
+	sprintf(aux, "%s ", Subnet_is_used(ip, subnet_bits, subnet_number)?
 		"yes":"no");
 	strcat(s, aux);
 
