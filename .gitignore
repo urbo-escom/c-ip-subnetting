@@ -1,3 +1,6 @@
+# Swap/Backup files
+*.swp
+
 # Object files
 *.o
 *.ko
@@ -14,6 +17,8 @@
 
 # Executables
 *.bin
+bin/client
+bin/server
 *.exe
 *.out
 *.app
