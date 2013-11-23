@@ -28,9 +28,9 @@ Se puede pedir información del subnetting o calcular una subred.
     info_by_ip_and_hosts <ip> <total-hosts>
     info_by_ip_and_hosts_per_subnet <ip> <hosts-per-subnet>
     info_by_ip_and_subnets <ip> <subnets>
-    info_by_hosts <total-hosts> <ip-id>
-    info_by_hosts_per_subnet <hosts-per-subnet> <ip-id>
-    info_by_subnets <subnets> <ip-id>
+    info_by_hosts <ip-id> <total-hosts>
+    info_by_hosts_per_subnet <ip-id> <hosts-per-subnet>
+    info_by_subnets <ip-id> <subnets>
 
 #### Cálculo de subred
 
@@ -43,7 +43,7 @@ Se puede pedir información del subnetting o calcular una subred.
     subnetting_by_ip_and_hosts <ip> <total-hosts> <subnet-id>
     subnetting_by_ip_and_hosts_per_subnet <ip> <hosts-per-subnet> <subnet-id>
     subnetting_by_ip_and_subnets <ip> <subnets> <subnet-id>
-    subnetting_by_hosts <total-hosts> <subnet-id> <ip-id>
-    subnetting_by_hosts_per_subnet <hosts-per-subnet> <subnet-id> <ip-id>
-    subnetting_by_subnets subnets <subnet-id> <ip-id>
+    subnetting_by_hosts <ip-id> <total-hosts> <subnet-id>
+    subnetting_by_hosts_per_subnet <ip-id> <hosts-per-subnet> <subnet-id>
+    subnetting_by_subnets subnets <ip-id> <subnet-id>
 

@@ -8,7 +8,7 @@ static char info[1025];
 
 static int parse(const char* s, unsigned long int* l,
 		int* id, Subnet* subnet) {
-	return sscanf(s, "%*s %lu %d %lu", l, id, subnet) == 3;
+	return sscanf(s, "%*s %d %lu %lu", id, l, subnet) == 3;
 }
 
 #define parse_and_check(request, l, id, subnet) do{\

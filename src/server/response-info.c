@@ -7,7 +7,7 @@
 static char info[1025];
 
 static int parse(const char* s, unsigned long int* l, int* id) {
-	return sscanf(s, "%*s %lu %d", l, id) == 2;
+	return sscanf(s, "%*s %d %lu", id, l) == 2;
 }
 
 extern char* info_by_hosts(const char* request) {
