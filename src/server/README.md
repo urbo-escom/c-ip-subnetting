@@ -25,12 +25,12 @@ Se puede pedir información del subnetting o calcular una subred.
 
 ##### Listado de peticiones posibles
 
-    info_by_ip_and_hosts <ip> <total-hosts>
-    info_by_ip_and_hosts_per_subnet <ip> <hosts-per-subnet>
-    info_by_ip_and_subnets <ip> <subnets>
-    info_by_hosts <ip-id> <total-hosts>
-    info_by_hosts_per_subnet <ip-id> <hosts-per-subnet>
-    info_by_subnets <ip-id> <subnets>
+    info-by-ip-and-hosts <ip> <total-hosts>
+    info-by-ip-and-hosts-per-subnet <ip> <hosts-per-subnet>
+    info-by-ip-and-subnets <ip> <subnets>
+    info-by-hosts <ip-id> <total-hosts>
+    info-by-hosts-per-subnet <ip-id> <hosts-per-subnet>
+    info-by-subnets <ip-id> <subnets>
 
 #### Cálculo de subred
 
@@ -40,10 +40,10 @@ Se puede pedir información del subnetting o calcular una subred.
 
 ##### Listado de peticiones posibles
 
-    subnetting_by_ip_and_hosts <ip> <total-hosts> <subnet-id>
-    subnetting_by_ip_and_hosts_per_subnet <ip> <hosts-per-subnet> <subnet-id>
-    subnetting_by_ip_and_subnets <ip> <subnets> <subnet-id>
-    subnetting_by_hosts <ip-id> <total-hosts> <subnet-id>
-    subnetting_by_hosts_per_subnet <ip-id> <hosts-per-subnet> <subnet-id>
-    subnetting_by_subnets subnets <ip-id> <subnet-id>
+    subnetting-by-ip-and-hosts <ip> <total-hosts> <subnet-id>
+    subnetting-by-ip-and-hosts-per-subnet <ip> <hosts-per-subnet> <subnet-id>
+    subnetting-by-ip-and-subnets <ip> <subnets> <subnet-id>
+    subnetting-by-hosts <ip-id> <total-hosts> <subnet-id>
+    subnetting-by-hosts-per-subnet <ip-id> <hosts-per-subnet> <subnet-id>
+    subnetting-by-subnets subnets <ip-id> <subnet-id>
 

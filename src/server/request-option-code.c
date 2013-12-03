@@ -12,32 +12,32 @@ extern int request_option_code(const char* request) {
 
 	if (sscanf(request, "%s", s) != 1)
 		return REQUEST_FAILED;
-	if (equal(s, "info_by_ip_and_hosts"))
+	if (equal(s, "info-by-ip-and-hosts"))
 		return INFO_BY_IP_AND_HOSTS;
-	if (equal(s, "info_by_ip_and_hosts_per_subnet"))
+	if (equal(s, "info-by-ip-and-hosts-per-subnet"))
 		return INFO_BY_IP_AND_HOSTS_PER_SUBNET;
-	if (equal(s, "info_by_ip_and_subnets"))
+	if (equal(s, "info-by-ip-and-subnets"))
 		return INFO_BY_IP_AND_SUBNETS;
 
-	if (equal(s, "info_by_hosts"))
+	if (equal(s, "info-by-hosts"))
 		return INFO_BY_HOSTS;
-	if (equal(s, "info_by_hosts_per_subnet"))
+	if (equal(s, "info-by-hosts-per-subnet"))
 		return INFO_BY_HOSTS_PER_SUBNET;
-	if (equal(s, "info_by_subnets"))
+	if (equal(s, "info-by-subnets"))
 		return INFO_BY_SUBNETS;
 
-	if (equal(s, "subnetting_by_ip_and_hosts"))
+	if (equal(s, "subnetting-by-ip-and-hosts"))
 		return SUBNETTING_BY_IP_AND_HOSTS;
-	if (equal(s, "subnetting_by_ip_and_hosts_per_subnet"))
+	if (equal(s, "subnetting-by-ip-and-hosts-per-subnet"))
 		return SUBNETTING_BY_IP_AND_HOSTS_PER_SUBNET;
-	if (equal(s, "subnetting_by_ip_and_subnets"))
+	if (equal(s, "subnetting-by-ip-and-subnets"))
 		return SUBNETTING_BY_IP_AND_SUBNETS;
 
-	if (equal(s, "subnetting_by_hosts"))
+	if (equal(s, "subnetting-by-hosts"))
 		return SUBNETTING_BY_HOSTS;
-	if (equal(s, "subnetting_by_hosts_per_subnet"))
+	if (equal(s, "subnetting-by-hosts-per-subnet"))
 		return SUBNETTING_BY_HOSTS_PER_SUBNET;
-	if (equal(s, "subnetting_by_subnets"))
+	if (equal(s, "subnetting-by-subnets"))
 		return SUBNETTING_BY_SUBNETS;
 
 	if (equal(s, "shutdown") || equal(s, "shutdown\r\n"))
